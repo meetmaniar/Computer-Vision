@@ -23,11 +23,11 @@ using namespace cv;
 
 int main()
 {
-	Mat source1 = imread("C:\\Users\\Meet-69\\Documents\\Visual Studio 2013\\Projects\\Assignment-3\\assignment3_sample_images\\assignment3_sample_images\\Rainier1.png", WINDOW_AUTOSIZE);
+	Mat source1 = imread("Rainier1.png", WINDOW_AUTOSIZE);
 	namedWindow("source1", WINDOW_AUTOSIZE);
 	imshow("source1", source1);
 
-	Mat source2 = imread("C:\\Users\\Meet-69\\Documents\\Visual Studio 2013\\Projects\\Assignment-3\\assignment3_sample_images\\assignment3_sample_images\\Rainier2.png", WINDOW_AUTOSIZE);
+	Mat source2 = imread("Rainier2.png", WINDOW_AUTOSIZE);
 	namedWindow("source2", WINDOW_AUTOSIZE);
 	imshow("source2", source2);
 
