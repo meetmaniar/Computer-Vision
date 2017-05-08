@@ -1,3 +1,6 @@
+/*
+	Author: Meet Maniar 
+*/
 #include<stdio.h>
 #include<iostream>
 #include<string.h>
@@ -16,8 +19,8 @@ void my_harris(int, int);
 
 int main()
 {
-	src = imread("C:\\Users\\Meet-69\\Documents\\Visual Studio 2013\\Projects\\Assignment-3\\image_sets\\yosemite\\Yosemite1.jpg", WINDOW_AUTOSIZE);
-	src2 = imread("C:\\Users\\Meet-69\\Documents\\Visual Studio 2013\\Projects\\Assignment-3\\image_sets\\yosemite\\Yosemite2.jpg", WINDOW_AUTOSIZE);
+	src = imread("Yosemite1.jpg", WINDOW_AUTOSIZE);
+	src2 = imread("Yosemite2.jpg", WINDOW_AUTOSIZE);
 	cvtColor(src, src_gray, CV_BGR2GRAY);
 	cvtColor(src2, src_gray2, CV_BGR2GRAY);
 	namedWindow("source", WINDOW_AUTOSIZE);
