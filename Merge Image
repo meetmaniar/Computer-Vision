@@ -1,4 +1,6 @@
-/* Author : Meet Maniar */
+/*
+	Author: Meet Maniar 
+*/
 #include<stdio.h>
 #include<iostream>
 #include<conio.h>
