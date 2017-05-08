@@ -1,0 +1,73 @@
+/* 
+    Author: Meet Maniar
+*/
+
+#include<stdio.h>
+#include<iostream>
+#include<opencv2\opencv.hpp>
+#include<opencv2\imgproc\imgproc.hpp>
+#include<opencv2\highgui\highgui.hpp>
+#include<opencv2\core\core.hpp>
+#include<cmath>
+#include<iomanip>
+
+using namespace cv;
+using namespace std;
+
+void my_filter(const Mat& src, Mat& dst, const Mat& kernel) {
+	cout << "filter" << endl;
+	cout << kernel << endl;
+
+	for (int i = 0; i<src.rows; i++) {
+		for (int j = 0; j<src.cols; j++) {
+			float p = 0;
+			for (int k = 0; k<kernel.rows; k++) {
+				for (int l = 0; l<kernel.cols; l++) {
+					if (i + k < src.rows && j + l < src.cols) {
+						p += (src.at<uchar>(i + k, j + l) * kernel.at<double>(k, l));
+					}
+				}
+			}
+	
+			
+			
+			if (i + kernel.rows < src.rows && j + kernel.cols < src.cols) {
+				dst.at<uchar>(i + kernel.rows, j + kernel.cols) = p / sum(kernel)[0];
+			}
+			
+
+		}
+	}
+}
+
+int main()
+{
+	Mat src1 = imread("dog.bmp", WINDOW_AUTOSIZE);
+	Mat src2 = imread("cat.bmp", WINDOW_AUTOSIZE);
+	Mat gauss13x3 = Mat(src1.cols, src1.rows, src1.type()); //src1.clone();
+	Mat gauss23x3 = Mat(src2.cols, src2.rows, src2.type()); //src2.clone();
+
+	cout << src1.cols << " cols" << src1.rows << " rows";
+	Mat kernelX = getGaussianKernel(9, 3);
+	Mat kernelY = getGaussianKernel(9, 3);
+	Mat kernelXY = kernelX * kernelY.t();
+
+	my_filter(src1, gauss13x3, kernelXY);
+	my_filter(src2, gauss23x3, kernelXY);
+
+
+	//cout << gauss13x3.cols << " cols" << gauss13x3.rows << " rows";
+	namedWindow("window_name4", WINDOW_AUTOSIZE);
+	imshow("window_name4", gauss13x3);
+	namedWindow("window_name5", WINDOW_AUTOSIZE);
+	imshow("window_name5", gauss23x3);
+	waitKey(0);
+
+	Mat hyb;
+	Mat h = src2 - gauss23x3 + 128;
+	imshow("HF", h);
+	addWeighted(gauss23x3, 0.5, h, 0.5, 0.0, hyb, -1);
+	imshow("hybrid", hyb);
+	waitKey(0);
+}
+
